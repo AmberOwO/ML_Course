@@ -48,7 +48,7 @@ def ml_loop():
 
         # 3.4. Send the instruction for this frame to the game process
         if not ball_served:
-            comm.send_instruction(scene_info.frame, PlatformAction.SERVE_TO_RIGHT)
+            comm.send_instruction(scene_info.frame, PlatformAction.SERVE_TO_LEFT)
             ball_served = True
         else:
             # 取得兩組球的x, y值
@@ -63,18 +63,18 @@ def ml_loop():
                         boundR = ball_y - m*(ball_x - 200)
                         m2 = -m
                         plat_x_next = 200 - (boundR - 400)/m2
-                        if plat_x + 25 - plat_x_next > 15:
+                        if plat_x + 25 - plat_x_next > 10:
                             comm.send_instruction(scene_info.frame, PlatformAction.MOVE_LEFT)
-                        elif plat_x + 25 - plat_x_next < -15:
+                        elif plat_x + 25 - plat_x_next < -10:
                             comm.send_instruction(scene_info.frame, PlatformAction.MOVE_RIGHT)
                         else:
                             comm.send_instruction(scene_info.frame, PlatformAction.NONE)
 
                     else: #不會碰到右邊
                         plat_x_next = ball_x - (ball_y - 400)/m
-                        if plat_x + 25 - plat_x_next > 15:
+                        if plat_x + 25 - plat_x_next > 10:
                             comm.send_instruction(scene_info.frame, PlatformAction.MOVE_LEFT)
-                        elif plat_x + 25 - plat_x_next < -15:
+                        elif plat_x + 25 - plat_x_next < -10:
                             comm.send_instruction(scene_info.frame, PlatformAction.MOVE_RIGHT)
                         else:
                             comm.send_instruction(scene_info.frame, PlatformAction.NONE)
@@ -85,26 +85,26 @@ def ml_loop():
                         boundL = ball_y - m*(ball_x)
                         m2 = -m
                         plat_x_next =  - (boundL - 400)/m2
-                        if plat_x + 25 - plat_x_next > 15:
+                        if plat_x + 25 - plat_x_next > 10:
                             comm.send_instruction(scene_info.frame, PlatformAction.MOVE_LEFT)
-                        elif plat_x + 25 - plat_x_next < -15:
+                        elif plat_x + 25 - plat_x_next < -10:
                             comm.send_instruction(scene_info.frame, PlatformAction.MOVE_RIGHT)
                         else:
                             comm.send_instruction(scene_info.frame, PlatformAction.NONE)
 
                     else: #不會碰到左邊
                         plat_x_next =  ball_x - (ball_y - 400)/m
-                        if plat_x + 25 - plat_x_next > 15:
+                        if plat_x + 25 - plat_x_next > 10:
                             comm.send_instruction(scene_info.frame, PlatformAction.MOVE_LEFT)
-                        elif plat_x + 25 - plat_x_next < -15:
+                        elif plat_x + 25 - plat_x_next < -10:
                             comm.send_instruction(scene_info.frame, PlatformAction.MOVE_RIGHT)
                         else:
                             comm.send_instruction(scene_info.frame, PlatformAction.NONE)
                 
                 else: # 垂直往下
-                    if plat_x + 25 - ball_x > 15:
+                    if plat_x + 25 - ball_x > 10:
                         comm.send_instruction(scene_info.frame, PlatformAction.MOVE_LEFT)
-                    elif plat_x + 25 - ball_x < -15:
+                    elif plat_x + 25 - ball_x < -10:
                         comm.send_instruction(scene_info.frame, PlatformAction.MOVE_RIGHT)
                     else:
                         comm.send_instruction(scene_info.frame, PlatformAction.NONE)
